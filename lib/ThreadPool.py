@@ -24,6 +24,9 @@ class ThreadPool:
     def add_thread(self):
         self._q.put(threading.Thread)
 
+
+
+
 pool = ThreadPool(8)
 
 def worker(num,p):
