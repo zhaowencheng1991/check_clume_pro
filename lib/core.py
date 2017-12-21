@@ -23,7 +23,7 @@ def diff_file(model):
     position_file = position_dir + model + '_position.json'
     with open(position_file,'r') as f:
         data = json.load(f,encoding='utf-8')
-        print data[0]      #{u'inode': 922009, u'pos': 55574166, u'file': u'/data0/logs/clickstream/staytime.20171221160000'}
+        print data[0]["file"]    #{u'inode': 922009, u'pos': 55574166, u'file': u'/data0/logs/clickstream/staytime.20171221160000'}
 
 
 diff_file('staytime')
