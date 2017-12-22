@@ -5,6 +5,8 @@
 import json
 from tool import *
 from ThreadPool import *
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 read_err_model_list = []
 allert_num = 500
