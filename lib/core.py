@@ -59,8 +59,8 @@ def main(ps_cmd,):
     else:
         for i in model_list:
             result = diff_model_allert(i)
-
-        allert_mail('suda前端服务器:' + ip + 'flume数据读取延迟：' +str(result),allert_users)
+        if result:
+            allert_mail('suda前端服务器:' + ip + 'flume数据读取延迟：' +str(result),allert_users)
 
 main("ps aux | grep flume|grep -v grep")
 
