@@ -60,7 +60,7 @@ def main(ps_cmd,):
     else:
         for i in model_list:
             result = diff_model_allert(i)
-
+        print result
         if result:
             allert_mail('suda前端服务器:' + ip + 'flume数据读取延迟：' + str(result[0]) + str(result[1]),allert_users)
 
