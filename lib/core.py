@@ -13,7 +13,7 @@ model_list = ['sima_mrt','clickmap','clickstream']
 
 def check_pro(ps_cmd):
     ex_result = ex_cmd(ps_cmd)
-    status = int(ex_result[2])
+    status = ex_result[2]
     return status
 
 def get_last_file(model):
@@ -58,7 +58,7 @@ def main(ps_cmd,):
             obj = t(target=diff_model_allert, args=(i, pool))
             obj.start()
 
-main("ps aux | grep abced")
+main("ps aux | grep flume|grep -v grep")
 
 
 

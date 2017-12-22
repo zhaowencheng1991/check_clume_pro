@@ -18,7 +18,6 @@ def ex_cmd(cmd):
     result_list = [res,err,wait,]
     return  result_list
 
-
 def allert_mail(message,allert_users,):
     message = str(message)
     level = 'waring'
@@ -28,8 +27,5 @@ def allert_mail(message,allert_users,):
     receiver = allert_users
     curl_cmd = ("curl -d receivers=%s -d service=%s -d level=%s -d subject=%s -d content='%s', %s") % (receiver,service,level,subject,message,mail)
     ex_cmd(curl_cmd)
-
-
-
 
 
