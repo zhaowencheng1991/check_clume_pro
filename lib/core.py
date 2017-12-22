@@ -23,7 +23,7 @@ def get_last_file(model):
 def check_size(model):
     size_ngixn_cmd = "du -sb " + get_last_file(model)[2] + "|awk '{print $1}'"
     size_flume_pos,size_nginx_log = int(get_last_file(model)[1]),int(ex_cmd(size_ngixn_cmd)[0])
-    return [size_nginx_log, size_flume_pos]
+    return {"size_nginx_log":size_nginx_log, "size_flume_pos":size_flume_pos}
 
 def main(ps_cmd,):
     status = check_pro(ps_cmd)
