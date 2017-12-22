@@ -5,12 +5,17 @@
 import json
 from tool import *
 from ThreadPool import *
+import threading
 
+
+allert_num = 500000
 allert_users = 'wencheng'
 cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") print $2}' | head -1'''
 ip = ex_cmd(cmd_get_ip)[0]
 position_dir = '/data0/flume/positionFile/'
 model_list = ['sima_mrt','clickmap','clickstream']
+read_err_model_list = []
+lock = threading.RLock()
 
 def check_pro(ps_cmd):
     ex_result = ex_cmd(ps_cmd)
@@ -32,7 +37,7 @@ def check_size(model):
     else:
         get_flag = "NO"
         diff_num = 1000000
-    return {"size_nginx_log": size_nginx_log, "size_flume_pos": size_flume_pos, "diff_num": diff_num, "get_flag": get_flag}
+    return {"size_nginx_log": size_nginx_log, "size_flume_pos": size_flume_pos, "diff_num": diff_num, "get_flag": get_flag,"last_file":get_last_file(model)[2]}
 
 def diff_model_allert(model,p):
     for i in range(3):
@@ -42,7 +47,13 @@ def diff_model_allert(model,p):
             time.sleep(20)
             continue
 
-    print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
+    #print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
+    if size_list["diff_num"] >= allert_num:
+        print model+"同步延迟超过"+allert_num+"B,延迟大小为:"+size_list["diff_num"]+",延迟读取文件:"+size_list["get_last_file"]
+        lock.acquire()
+        global read_err_model_list
+        read_err_model_list.append(model)
+        lock.release()
 
     p.add_thread()
 def main(ps_cmd,):
@@ -50,7 +61,6 @@ def main(ps_cmd,):
     print status
     if status != 0:
         allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查',allert_users)
-        print "flume err"
         exit(127)
     else:
         pool =  ThreadPool(3)
@@ -58,6 +68,8 @@ def main(ps_cmd,):
             t = pool.get_thread()
             obj = t(target=diff_model_allert, args=(i, pool))
             obj.start()
+        if read_err_model_list:
+            print str(read_err_model_list)
 
 main("ps aux | grep flume|grep -v grep")
 
