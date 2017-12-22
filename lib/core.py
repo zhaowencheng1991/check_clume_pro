@@ -68,6 +68,7 @@ def main(ps_cmd,):
         if result[0]:
             a = result[1][0]
             print a
+
             mess = "suda前端服务器:%s,flume数据读取延迟%s,参考文档:http://wiki.pso.sina.com.cn/pages/viewpage.action?pageId=8323362" %(ip,str(result[0]))
             #print mess
             allert_mail(mess,allert_users)
