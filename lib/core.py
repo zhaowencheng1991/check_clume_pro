@@ -33,7 +33,7 @@ def main(ps_cmd,):
     else:
         model = 'staytime'
         size_list = check_size(model)
-        print "size_flume_pos",size_list["size_flume_pos"],"size_nginx_log",size_list["size_nginx_log"]
+        print "size_flume_pos :",size_list["size_flume_pos"],"      size_nginx_log:",size_list["size_nginx_log"]
 
 main("ps aux | grep flume")
 
