@@ -13,7 +13,7 @@ model_list = ['sima_mrt','clickmap','clickstream']
 
 def check_pro(ps_cmd):
     ex_result = ex_cmd(ps_cmd)
-    status = ex_result[2]
+    status = int(ex_result[2])
     return status
 
 def get_last_file(model):
