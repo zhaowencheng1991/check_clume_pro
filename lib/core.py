@@ -67,7 +67,7 @@ def main(ps_cmd,):
             result = diff_model_allert(i)
         if result[0]:
             #a = unicode(result[1][0],encoding='utf-8')
-            mess = "suda前端服务器:%s,flume数据读取延迟%s" %(ip,str(result[0]))
+            mess = "suda前端服务器:%s,flume数据读取延迟%s,参考文档:http://wiki.pso.sina.com.cn/pages/viewpage.action?pageId=8323362" %(ip,str(result[0]))
             #print mess
             allert_mail(mess,allert_users)
 
