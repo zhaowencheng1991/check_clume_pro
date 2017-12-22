@@ -48,6 +48,7 @@ def main(ps_cmd,):
     status = check_pro(ps_cmd)
     if status != 0:
         allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查')
+        print "flume err"
         exit(127)
     else:
         pool =  ThreadPool(3)
@@ -56,7 +57,7 @@ def main(ps_cmd,):
             obj = t(target=diff_model_allert, args=(i, pool))
             obj.start()
 
-main("ps aux | grep flume")
+main("ps aux | grep abced")
 
 
 
