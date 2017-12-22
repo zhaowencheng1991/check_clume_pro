@@ -51,7 +51,7 @@ def diff_model_allert(model):
         global read_err_model_list,err_message_list
         err_message_list.append(err_message)
         read_err_model_list.append(model)
-    print err_message_list,read_err_model_list
+    #print err_message_list,read_err_model_list
     return [read_err_model_list,err_message_list]
 def main(ps_cmd,):
     status = check_pro(ps_cmd)
