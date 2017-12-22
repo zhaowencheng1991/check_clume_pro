@@ -35,6 +35,8 @@ def main(ps_cmd,):
         size_list = check_size(model)
         print size_list
 
+main("ps aux | grep flume")
+
 
 
 
