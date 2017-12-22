@@ -21,8 +21,8 @@ def get_last_file(model):
         return [data[5]["inode"],data[5]["pos"],data[5]["file"]]  #{u'inode': 922009, u'pos': 55574166, u'file': u'/data0/logs/clickstream/staytime.20171221160000'}
 
 def check_size(model):
-    size_ngixn_cmd = "du -sb " + get_last_file(model)[2]
-    size_flume_pos,size_nginx_log = get_last_file(model)[1],ex_cmd(size_ngixn_cmd)
+    size_ngixn_cmd = "du -sb " + get_last_file(model)[2] + "|awk '{print $1}'"
+    size_flume_pos,size_nginx_log = int(get_last_file(model)[1]),int(ex_cmd(size_ngixn_cmd))
     return [size_nginx_log, size_flume_pos]
 
 def main(ps_cmd,):
