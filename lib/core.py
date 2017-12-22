@@ -48,7 +48,7 @@ def diff_model_allert(model):
 
     #print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
     if size_list["diff_num"] >= allert_num:
-        err_mess = "%s,同步延迟超过%sB延迟大小(日志实际大小-flume读取大小)为:%sB延迟读取文件:%s"  % (model,allert_num,size_list["diff_num"],size_list["last_file"])
+        err_mess = "%s 同步延迟超过%sB延迟大小(日志实际大小-flume读取大小)为:%sB延迟读取文件:%s"  % (model,allert_num,size_list["diff_num"],size_list["last_file"])
         printLog(err_mess,3)
         global read_err_model_list
         read_err_model_list.append(model)
