@@ -6,6 +6,7 @@ import json
 from tool import *
 from ThreadPool import *
 
+allert_users = 'wencheng'
 cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") print $2}' | head -1'''
 ip = ex_cmd(cmd_get_ip)[0]
 position_dir = '/data0/flume/positionFile/'
