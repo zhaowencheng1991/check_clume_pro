@@ -38,7 +38,7 @@ def check_size(model):
         diff_num = 1000000
     return {"size_nginx_log": size_nginx_log, "size_flume_pos": size_flume_pos, "diff_num": diff_num, "get_flag": get_flag,"last_file":get_last_file(model)[2]}
 
-def diff_model_allert(model,p):
+def diff_model_allert(model):
     for i in range(3):
         size_list = check_size(model)
         if size_list["get_flag"] == "NO":
@@ -68,7 +68,7 @@ def main(ps_cmd,):
             #t = pool.get_thread()
             #obj = t(target=diff_model_allert, args=(i, pool))
             #obj.start()
-            result = diff_model_allert()
+            result = diff_model_allert(i)
             print result
 
 
