@@ -41,7 +41,7 @@ def diff_model_allert(model,p):
             time.sleep(20)
             continue
 
-    print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["get_flag"]
+    print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
 
     p.add_thread()
 def main(ps_cmd,):
