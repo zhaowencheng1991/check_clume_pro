@@ -70,8 +70,7 @@ def main(ps_cmd,):
 
         global read_err_model_list
         if read_err_model_list:
-
-        print read_err_model_list
+            print read_err_model_list
 
 
 main("ps aux | grep flume|grep -v grep")
