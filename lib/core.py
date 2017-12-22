@@ -8,7 +8,7 @@ from ThreadPool import *
 import threading
 
 
-allert_num = 500000
+allert_num = 500
 allert_users = 'wencheng'
 cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") print $2}' | head -1'''
 ip = ex_cmd(cmd_get_ip)[0]
