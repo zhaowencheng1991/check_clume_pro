@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# coding: utf-8
+# -*- coding: utf-8 -*-
 # author  :zhaowencheng
 # desc    :check_flume
 import json
@@ -68,7 +68,7 @@ def main(ps_cmd,):
         if result[0]:
             #a = unicode(result[1][0],encoding='utf-8')
             mess = "suda前端服务器:%s,flume数据读取延迟%s" %(ip,str(result[0]))
-            print mess
+            #print mess
             allert_mail(mess,allert_users)
 
 main("ps aux | grep flume|grep -v grep")
