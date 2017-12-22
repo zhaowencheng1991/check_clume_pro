@@ -7,7 +7,6 @@ from tool import *
 from ThreadPool import *
 
 read_err_model_list = []
-err_message_list = []
 allert_num = 500
 allert_users = 'wencheng'
 cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") print $2}' | head -1'''
@@ -47,13 +46,11 @@ def diff_model_allert(model):
 
     #print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
     if size_list["diff_num"] >= allert_num:
-        err_message = model,"同步延迟超过",allert_num,"B延迟大小(日志实际大小-flume读取大小)为:",size_list["diff_num"],"B延迟读取文件:",size_list["last_file"]
-        print err_message
-        global read_err_model_list,err_message_list
-        err_message_list.append(err_message)
+        print model,"同步延迟超过",allert_num,"B延迟大小(日志实际大小-flume读取大小)为:",size_list["diff_num"],"B延迟读取文件:",size_list["last_file"]
+        global read_err_model_list
         read_err_model_list.append(model)
     #print err_message_list,read_err_model_list
-    return [read_err_model_list,err_message_list]
+    return [read_err_model_list]
 def main(ps_cmd,):
     status = check_pro(ps_cmd)
     if status != 0:
@@ -62,9 +59,8 @@ def main(ps_cmd,):
     else:
         for i in model_list:
             result = diff_model_allert(i)
-        #print result
-        if result:
-            allert_mail('suda前端服务器:' + ip + 'flume数据读取延迟：' + result[0] + result[1],allert_users)
+
+        allert_mail('suda前端服务器:' + ip + 'flume数据读取延迟：' +str(result),allert_users)
 
 main("ps aux | grep flume|grep -v grep")
 
