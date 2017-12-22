@@ -20,16 +20,27 @@ def get_last_file(model):
     position_file = position_dir + model + '_position.json'
     with open(position_file,'r') as f:
         data = json.load(f,encoding='utf-8')
-        return [data[5]["inode"],data[5]["pos"],data[5]["file"]]  #{u'inode': 922009, u'pos': 55574166, u'file': u'/data0/logs/clickstream/staytime.20171221160000'}
+        return [data[-1]["inode"],data[5]["pos"],data[5]["file"]]  #{u'inode': 922009, u'pos': 55574166, u'file': u'/data0/logs/clickstream/staytime.20171221160000'}
 
 def check_size(model):
     size_ngixn_cmd = "du -sb " + get_last_file(model)[2] + "|awk '{print $1}'"
     size_flume_pos,size_nginx_log = int(get_last_file(model)[1]),int(ex_cmd(size_ngixn_cmd)[0])
-    return {"size_nginx_log":size_nginx_log, "size_flume_pos":size_flume_pos}
+    if  size_flume_pos and size_nginx_log:
+        diff_num = size_nginx_log - size_flume_pos
+        get_flag = "YES"
+    else:
+        get_flag = "NO"
+        diff_num = 1000000
+    return {"size_nginx_log": size_nginx_log, "size_flume_pos": size_flume_pos, "diff_num": diff_num, "get_flag": get_flag}
 
 def diff_model_allert(model,p):
-    size_list = check_size(model)
-    print model+": size_flume_pos :",size_list["size_flume_pos"],"      size_nginx_log:",size_list["size_nginx_log"]
+    for i in range(3):
+        size_list = check_size(model)
+        if size_list["get_flag"] == "NO":
+            time.sleep(20)
+            continue
+        else:
+            print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"]
 
     p.add_thread()
 def main(ps_cmd,):
