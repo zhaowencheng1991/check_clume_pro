@@ -4,6 +4,13 @@
 # desc    :distcp
 
 import subprocess
+import datetime
+import time
+import os
+import sys
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(base_dir)
+pwd = os.path.split(os.path.realpath(__file__))[0]
 
 def ex_cmd(cmd):
     '''
@@ -28,4 +35,25 @@ def allert_mail(message,allert_users,):
     curl_cmd = ("curl -d receivers=%s -d service=%s -d level=%s -d subject=%s -d content='%s', %s") % (receiver,service,level,subject,message,mail)
     ex_cmd(curl_cmd)
 
+def printLog(message, level=1):
+    import sys
+    log_date = time.strftime('%Y-%m-%d',time.localtime())
+    log_name = pwd+'/../log/'+str(log_date)+".log"
+    print log_name
+    sys.stdout = open(log_name,'a')
+    sys.stderr = open(log_name,'a')
 
+    LEVEL_INFO = {
+        0: 'DEBUG',
+        1: 'INFO',
+        2: 'WARNING',
+        3: 'ERROR',
+    }
+
+    if level > 3 or level < 0:
+        level = 0
+
+    print str(datetime.datetime.now()) + ' [' + LEVEL_INFO[level] + '] ' + message
+    sys.stdout.flush()
+
+    return None
