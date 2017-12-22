@@ -67,6 +67,7 @@ def main(ps_cmd,):
             result = diff_model_allert(i)
         if result[0]:
             #a = result[1][0]
+            a = ''
             for i in result[1]:
                 a = a + i
             print a
