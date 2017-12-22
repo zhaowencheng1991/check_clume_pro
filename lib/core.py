@@ -27,6 +27,7 @@ def diff_file(model):
         print data[5]["pos"]
 
 
+
 diff_file('staytime')
 
 
