@@ -5,7 +5,6 @@
 import json
 from tool import *
 from ThreadPool import *
-import threading
 
 read_err_model_list = []
 allert_num = 500
@@ -14,7 +13,6 @@ cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") pr
 ip = ex_cmd(cmd_get_ip)[0]
 position_dir = '/data0/flume/positionFile/'
 model_list = ['sima_mrt','clickmap','clickstream']
-lock = threading.RLock()
 
 def check_pro(ps_cmd):
     ex_result = ex_cmd(ps_cmd)
@@ -60,7 +58,7 @@ def main(ps_cmd,):
     else:
         for i in model_list:
             result = diff_model_allert(i)
-        print result
+            allert_mail('suda前端服务器:' + ip + 'flume数据未正常读取请检查,未正常读取的模块为：' + str(result))
 
 main("ps aux | grep flume|grep -v grep")
 
