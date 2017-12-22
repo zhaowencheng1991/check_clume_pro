@@ -37,10 +37,11 @@ def diff_model_allert(model,p):
     for i in range(3):
         size_list = check_size(model)
         if size_list["get_flag"] == "NO":
+            print model,"未获取到对比数据,将会重试2次,间隔20秒"
             time.sleep(20)
             continue
-        else:
-            print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"]
+
+    print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["get_flag"]
 
     p.add_thread()
 def main(ps_cmd,):
