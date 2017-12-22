@@ -4,10 +4,12 @@
 # desc    :check_flume
 import json
 from tool import *
+from ThreadPool import *
 
 cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") print $2}' | head -1'''
 ip = ex_cmd(cmd_get_ip)[0]
 position_dir = '/data0/flume/positionFile/'
+model_list = ['sima_mrt','clickmap','clickstream']
 
 def check_pro(ps_cmd):
     ex_result = ex_cmd(ps_cmd)
@@ -25,15 +27,22 @@ def check_size(model):
     size_flume_pos,size_nginx_log = int(get_last_file(model)[1]),int(ex_cmd(size_ngixn_cmd)[0])
     return {"size_nginx_log":size_nginx_log, "size_flume_pos":size_flume_pos}
 
+def diff_model_allert(model,p):
+    size_list = check_size(model)
+    print model+": size_flume_pos :",size_list["size_flume_pos"],"      size_nginx_log:",size_list["size_nginx_log"]
+
+    p.add_thread()
 def main(ps_cmd,):
     status = check_pro(ps_cmd)
     if status != 0:
         allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查')
         exit(127)
     else:
-        model = 'staytime'
-        size_list = check_size(model)
-        print "size_flume_pos :",size_list["size_flume_pos"],"      size_nginx_log:",size_list["size_nginx_log"]
+        pool =  ThreadPool(3)
+        for i in model_list:
+            t = pool.get_thread()
+            obj = t(target=diff_model_allert, args=(i, pool))
+            obj.start()
 
 main("ps aux | grep flume")
 
