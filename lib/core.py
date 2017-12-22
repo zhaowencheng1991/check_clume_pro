@@ -48,29 +48,19 @@ def diff_model_allert(model):
 
     #print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
     if size_list["diff_num"] >= allert_num:
-        #lock.acquire()
         print model,"同步延迟超过",allert_num,"B延迟大小(日志实际大小-flume读取大小)为:",size_list["diff_num"],"B延迟读取文件:",size_list["last_file"]
         global read_err_model_list
         read_err_model_list.append(model)
-        #print read_err_model_list
-        #lock.release()
-
     return read_err_model_list
-    #p.add_thread()
 def main(ps_cmd,):
     status = check_pro(ps_cmd)
     if status != 0:
         allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查',allert_users)
         exit(127)
     else:
-        pool =  ThreadPool(3)
         for i in model_list:
-            #t = pool.get_thread()
-            #obj = t(target=diff_model_allert, args=(i, pool))
-            #obj.start()
             result = diff_model_allert(i)
         print result
-
 
 main("ps aux | grep flume|grep -v grep")
 
