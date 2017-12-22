@@ -52,7 +52,7 @@ def diff_model_allert(model):
         print model,"同步延迟超过",allert_num,"B延迟大小(日志实际大小-flume读取大小)为:",size_list["diff_num"],"B延迟读取文件:",size_list["last_file"]
         global read_err_model_list
         read_err_model_list.append(model)
-        print read_err_model_list
+        #print read_err_model_list
         #lock.release()
 
     return read_err_model_list
@@ -69,7 +69,7 @@ def main(ps_cmd,):
             #obj = t(target=diff_model_allert, args=(i, pool))
             #obj.start()
             result = diff_model_allert(i)
-            print result
+        print result
 
 
 main("ps aux | grep flume|grep -v grep")
