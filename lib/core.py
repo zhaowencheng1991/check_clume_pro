@@ -48,6 +48,7 @@ def diff_model_allert(model):
     #print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
     if size_list["diff_num"] >= allert_num:
         err_message = model,"同步延迟超过",allert_num,"B延迟大小(日志实际大小-flume读取大小)为:",size_list["diff_num"],"B延迟读取文件:",size_list["last_file"]
+        print err_message
         global read_err_model_list,err_message_list
         err_message_list.append(err_message)
         read_err_model_list.append(model)
@@ -63,7 +64,7 @@ def main(ps_cmd,):
             result = diff_model_allert(i)
         #print result
         if result:
-            allert_mail('suda前端服务器:' + ip + 'flume数据读取延迟：' + str(result[0]) + str(result[1]),allert_users)
+            allert_mail('suda前端服务器:' + ip + 'flume数据读取延迟：' + result[0] + result[1],allert_users)
 
 main("ps aux | grep flume|grep -v grep")
 
