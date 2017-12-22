@@ -58,7 +58,7 @@ def main(ps_cmd,):
     else:
         for i in model_list:
             result = diff_model_allert(i)
-            allert_mail('suda前端服务器:' + ip + 'flume数据未正常读取请检查,未正常读取的模块为：' + str(result))
+            allert_mail('suda前端服务器:' + ip + 'flume数据未正常读取请检查,未正常读取的模块为：' + str(result),allert_users)
 
 main("ps aux | grep flume|grep -v grep")
 
