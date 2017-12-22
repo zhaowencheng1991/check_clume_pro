@@ -68,6 +68,7 @@ def main(ps_cmd,):
         if result[0]:
             #a = result[1][0]
             a = '\n'
+
             for i in result[1]:
                 a = a + i
             print a
