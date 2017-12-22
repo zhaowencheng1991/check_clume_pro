@@ -66,9 +66,10 @@ def main(ps_cmd,):
             t = pool.get_thread()
             obj = t(target=diff_model_allert, args=(i, pool))
             obj.start()
+        global read_err_model_list
         if read_err_model_list:
-            #print read_err_model_list
-            pass
+            print read_err_model_list
+
 
 main("ps aux | grep flume|grep -v grep")
 
