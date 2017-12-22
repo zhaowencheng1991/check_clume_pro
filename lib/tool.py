@@ -39,7 +39,6 @@ def printLog(message, level=1):
     import sys
     log_date = time.strftime('%Y-%m-%d',time.localtime())
     log_name = pwd+'/../log/'+str(log_date)+".log"
-    print log_name
     sys.stdout = open(log_name,'a')
     sys.stderr = open(log_name,'a')
 
