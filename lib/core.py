@@ -24,6 +24,7 @@ def diff_file(model):
     with open(position_file,'r') as f:
         data = json.load(f,encoding='utf-8')
         print data[5]["file"]    #{u'inode': 922009, u'pos': 55574166, u'file': u'/data0/logs/clickstream/staytime.20171221160000'}
+        print data[5]["pos"]
 
 
 diff_file('staytime')
