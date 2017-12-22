@@ -66,7 +66,7 @@ def main(ps_cmd,):
         for i in model_list:
             result = diff_model_allert(i)
         if result[0]:
-            mess = "suda前端服务器:%s,flume数据读取延迟%s" %(ip,str(result[0]))
+            mess = "suda前端服务器:%s,flume数据读取延迟%s\n,具体信息如下:%s" %(ip,str(result[0]),str(result[1]))
             print mess
             allert_mail(mess,allert_users)
 
