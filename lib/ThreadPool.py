@@ -24,26 +24,25 @@ class ThreadPool:
     def add_thread(self):
         self._q.put(threading.Thread)
 
+#pool = ThreadPool(8)
+
+#def worker(num,p):
+#    print num
+#    time.sleep(1)
+#    p.add_thread()
+#
+#def start():
+#    cmd_list = []
+#    for i in range(1,101):
+#        cmd_list.append(i)
+#    for i in cmd_list:
+#        t=pool.get_thread()
+#        obj = t(target=worker,args=(i,pool))
+#        obj.start()
+
+#start()
 
 
-
-pool = ThreadPool(8)
-
-def worker(num,p):
-    print num
-    time.sleep(1)
-    p.add_thread()
-
-def start():
-    cmd_list = []
-    for i in range(1,101):
-        cmd_list.append(i)
-    for i in cmd_list:
-        t=pool.get_thread()
-        obj = t(target=worker,args=(i,pool))
-        obj.start()
-
-start()
 
 
 
