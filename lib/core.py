@@ -75,6 +75,7 @@ def main(ps_cmd,):
             #print mess
             allert_mail(mess,allert_users)
 
+
 main("ps aux | grep flume|grep -v grep")
 
 
