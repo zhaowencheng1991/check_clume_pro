@@ -14,7 +14,6 @@ cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") pr
 ip = ex_cmd(cmd_get_ip)[0]
 position_dir = '/data0/flume/positionFile/'
 model_list = ['sima_mrt','clickmap','clickstream']
-read_err_model_list = []
 lock = threading.RLock()
 
 def check_pro(ps_cmd):
@@ -63,6 +62,7 @@ def main(ps_cmd,):
         allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查',allert_users)
         exit(127)
     else:
+        read_err_model_list = []
         pool =  ThreadPool(3)
         for i in model_list:
             t = pool.get_thread()
