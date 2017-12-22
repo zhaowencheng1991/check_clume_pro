@@ -49,7 +49,7 @@ def main(ps_cmd,):
     status = check_pro(ps_cmd)
     print status
     if status != 0:
-        allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查')
+        allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查',allert_users)
         print "flume err"
         exit(127)
     else:
