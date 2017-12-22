@@ -67,6 +67,7 @@ def main(ps_cmd,):
             result = diff_model_allert(i)
         if result[0]:
             mess = "suda前端服务器:%s,flume数据读取延迟%s" %(ip,str(result))
+            print mess
             allert_mail(mess,allert_users)
 
 main("ps aux | grep flume|grep -v grep")
