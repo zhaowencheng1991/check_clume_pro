@@ -69,7 +69,6 @@ def main(ps_cmd,):
             obj = t(target=diff_model_allert, args=(i, pool))
             obj.start()
         if read_err_model_list:
-            global read_err_model_list
             print read_err_model_list
 
 main("ps aux | grep flume|grep -v grep")
