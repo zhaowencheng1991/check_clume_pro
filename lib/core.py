@@ -7,7 +7,7 @@ from tool import *
 from ThreadPool import *
 import threading
 
-
+read_err_model_list = []
 allert_num = 500
 allert_users = 'wencheng'
 cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") print $2}' | head -1'''
@@ -46,7 +46,6 @@ def diff_model_allert(model,p):
             time.sleep(20)
             continue
 
-
     #print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
     if size_list["diff_num"] >= allert_num:
         print model,"同步延迟超过",allert_num,"B延迟大小(日志实际大小-flume读取大小)为:",size_list["diff_num"],"B延迟读取文件:",size_list["last_file"]
@@ -62,7 +61,6 @@ def main(ps_cmd,):
         allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查',allert_users)
         exit(127)
     else:
-        read_err_model_list = []
         pool =  ThreadPool(3)
         for i in model_list:
             t = pool.get_thread()
