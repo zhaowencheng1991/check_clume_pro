@@ -7,7 +7,7 @@ from tool import *
 from ThreadPool import *
 reload(sys)
 sys.setdefaultencoding('utf8')
-
+err_mess_list = []
 read_err_model_list = []
 allert_num = 500
 allert_users = 'wencheng'
@@ -52,8 +52,10 @@ def diff_model_allert(model):
         printLog(err_mess,3)
         global read_err_model_list
         read_err_model_list.append(model)
+        global err_mess_list
+        err_mess_list.append(err_mess)
     #print err_message_list,read_err_model_list
-    return read_err_model_list
+    return [read_err_model_list,err_mess_list]
 
 def main(ps_cmd,):
     status = check_pro(ps_cmd)
@@ -63,8 +65,9 @@ def main(ps_cmd,):
     else:
         for i in model_list:
             result = diff_model_allert(i)
-        if result:
-            allert_mail('suda前端服务器:' + ip + 'flume数据读取延迟：' +str(result),allert_users)
+        if result[0]:
+            mess = "suda前端服务器:%s,flume数据读取延迟%s" %(ip,str(result))
+            allert_mail(mess,allert_users)
 
 main("ps aux | grep flume|grep -v grep")
 
