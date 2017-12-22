@@ -67,12 +67,10 @@ def main(ps_cmd,):
             result = diff_model_allert(i)
         if result[0]:
             #a = result[1][0]
-            a = '\n'
-
+            a = '\n   '
             for i in result[1]:
                 a = a + i
             print a
-
             mess = '''suda前端服务器:%s,flume数据读取延迟%s,详细信息如下:
                      %s
                     参考文档:http://wiki.pso.sina.com.cn/pages/viewpage.action?pageId=8323362''' %(ip,str(result[0]),a)
