@@ -72,7 +72,7 @@ def main(ps_cmd,):
             mess = '''suda前端服务器:%s,flume数据读取延迟%s,详细信息如下:
                      %s
                     参考文档:http://wiki.pso.sina.com.cn/pages/viewpage.action?pageId=8323362''' %(ip,str(result[0]),a)
-            #print mess
+             #print mess
             allert_mail(mess,allert_users)
 
 
