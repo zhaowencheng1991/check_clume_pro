@@ -5,17 +5,23 @@
 import json
 from tool import *
 from ThreadPool import *
+from conf import conf
+
+
+
 reload(sys)
 sys.setdefaultencoding('utf8')
-err_mess_list = []
-read_err_model_list = []
-allert_num = 500
-allert_users = 'wencheng'
+
+allert_num = conf.allert_num
+allert_users = conf.allert_users
 cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") print $2}' | head -1'''
 ip = ex_cmd(cmd_get_ip)[0]
-position_dir = '/data0/flume/positionFile/'
-model_list = ['sima_mrt','clickmap','clickstream']
+position_dir = conf.position_dir
+model_list = conf.model_list
 
+
+err_mess_list = []
+read_err_model_list = []
 def check_pro(ps_cmd):
     ex_result = ex_cmd(ps_cmd)
     status = ex_result[2]
