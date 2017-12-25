@@ -54,7 +54,7 @@ def diff_model_allert(model):
 
     #print model + ": size_flume_pos :", size_list["size_flume_pos"], "  size_nginx_log:", size_list["size_nginx_log"], "diff_num:",size_list["diff_num"]
     if size_list["diff_num"] >= allert_num:
-        err_mess = "%s 同步延迟超过%sB延迟大小(日志实际大小-flume读取大小)为:%sB延迟读取文件: %s\r\n"  % (model,allert_num,size_list["diff_num"],size_list["last_file"])
+        err_mess = "%s 同步延迟超过%sB延迟大小(日志实际大小-flume读取大小)为:%sB延迟读取文件: %s"  % (model,allert_num,size_list["diff_num"],size_list["last_file"])
         printLog(err_mess,3)
         global read_err_model_list
         read_err_model_list.append(model)
@@ -72,17 +72,10 @@ def main(ps_cmd,):
         for i in model_list:
             result = diff_model_allert(i)
         if result[0]:
-            #a = result[1][0]
-            a = ''
-            for i in result[1]:
-                a = a + i
-            print a
-            mess = '''suda前端服务器:%s,flume数据读取延迟%s,详细信息如下:
-                     %s
-                    参考文档:http://wiki.pso.sina.com.cn/pages/viewpage.action?pageId=8323362''' %(ip,str(result[0]),a)
+            mess = '''suda前端服务器:%s,flume数据读取有延迟已经超过预设阀值,模块为:%s,
+                    参考文档:http://wiki.pso.sina.com.cn/pages/viewpage.action?pageId=8323362''' %(ip,str(result[0]))
              #print mess
             allert_mail(mess,allert_users)
-
 
 main("ps aux | grep flume|grep -v grep")
 
