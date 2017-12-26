@@ -2,7 +2,7 @@
 
 #version:v0.0.0
 #2017-12-15
-#add by local
+#^_^
 
 简述:
 简单的一个python脚本,应用于flume监控,会检测flume进程是否存在,不存在则报警。
