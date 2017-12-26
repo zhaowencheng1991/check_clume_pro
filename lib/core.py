@@ -72,7 +72,7 @@ def main(ps_cmd,):
         for i in model_list:
             result = diff_model_allert(i)
         if result[0]:
-            mess = '''suda前端服务器:%s,flume数据读取有延迟已经超过预设阀值:%s,模块为:%s,
+            mess = '''suda前端服务器:%s,flume数据读取有延迟已经超过预设阀值:%sB,模块为:%s,
                     参考文档:http://wiki.pso.sina.com.cn/pages/viewpage.action?pageId=8323362''' %(ip,allert_num,str(result[0]))
              #print mess
             allert_mail(mess,allert_users)
