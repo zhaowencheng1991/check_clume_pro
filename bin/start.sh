@@ -6,6 +6,6 @@ python=`which python`
 if [ $0 != start.sh ];then
     file_path=`echo $0 |awk -F 'start.sh' '{print $1}'`
 else
-    file_path=$0
+    file_path=.
 fi
 python $file_path/../lib/core.py
