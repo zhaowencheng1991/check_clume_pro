@@ -13,6 +13,8 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 allert_num = conf.allert_num
+allert_num_display = allert_num / 1000000
+#print allert_num_display
 allert_users = conf.allert_users
 cmd_get_ip = '''/sbin/ifconfig |sed 's/addr://g' |awk -F " " '{if($1=="inet") print $2}' | head -1'''
 ip = ex_cmd(cmd_get_ip)[0]
@@ -57,7 +59,7 @@ def diff_model_allert(model):
         err_mess = "%s 同步延迟超过%sB延迟大小(日志实际大小-flume读取大小)为:%sB延迟读取文件: %s"  % (model,allert_num,size_list["diff_num"],size_list["last_file"])
         printLog(err_mess,3)
         global read_err_model_list
-        read_err_model_list.append(model)
+        read_err_model_list.append({model:size_list["diff_num"]})
         global err_mess_list
         err_mess_list.append(err_mess)
     #print err_message_list,read_err_model_list
