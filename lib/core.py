@@ -78,7 +78,7 @@ def main(ps_cmd,):
         if result[0]:
             mess = '''suda前端服务器:%s,flume数据读取有延迟已经超过预设阀值:%sB,模块:延迟值 分别为-------------------------:%s,
                     参考文档:http://wiki.pso.sina.com.cn/pages/viewpage.action?pageId=8323362''' %(ip,allert_num,str(result[0]))
-             #print mess
+
             allert_mail(mess,allert_users)
 
 main("ps aux | grep flume-release|grep -v grep")
