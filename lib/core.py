@@ -68,6 +68,7 @@ def main(ps_cmd,):
     if status != 0:
         allert_mail('SUDA前端服务器:'+ip+'flume进程不存在 请检查',allert_users)
         printLog('flume进程不存在.')
+
         exit(127)
     else:
         for i in model_list:
