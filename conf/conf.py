@@ -5,5 +5,5 @@
 
 model_list = ['sima_mrt','clickmap','clickstream']
 position_dir = '/data0/flume/positionFile/'
-allert_num = 500     #单位B
+allert_num = 700000    #单位B
 allert_users = 'wencheng'
