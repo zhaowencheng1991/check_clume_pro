@@ -33,7 +33,7 @@ def get_last_file(model):
     position_file = position_dir + model + '_position.json'
     with open(position_file,'r') as f:
         data = json.load(f,encoding='utf-8')
-        return [data[-1]["inode"],data[5]["pos"],data[5]["file"]]  #{u'inode': 922009, u'pos': 55574166, u'file': u'/data0/logs/clickstream/staytime.20171221160000'}
+        return [data[-1]["inode"],data[-1]["pos"],data[-1]["file"]]  #{u'inode': 922009, u'pos': 55574166, u'file': u'/data0/logs/clickstream/staytime.20171221160000'}
 
 def check_size(model):
     size_ngixn_cmd = "du -sb " + get_last_file(model)[2] + "|awk '{print $1}'"
